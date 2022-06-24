@@ -7,13 +7,13 @@
    <fragment
       android:id="@+id/homeFragment"
       android:name="id.rllyhz.schotersnewsapp.ui.features.home.HomeFragment"
-      android:label="HomeFragment" />
+      android:label="@string/main_bottom_nav_menu_home" />
    <fragment
       android:id="@+id/searchFragment"
       android:name="id.rllyhz.schotersnewsapp.ui.features.search.SearchFragment"
-      android:label="SearchFragment" />
+      android:label="@string/main_bottom_nav_menu_search" />
    <fragment
       android:id="@+id/profileFragment"
       android:name="id.rllyhz.schotersnewsapp.ui.features.profile.ProfileFragment"
-      android:label="ProfileFragment" />
+      android:label="@string/main_bottom_nav_menu_profile" />
 </navigation>
