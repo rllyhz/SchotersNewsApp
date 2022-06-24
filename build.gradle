@@ -11,7 +11,7 @@ ext {
     coroutineVersion = '1.5.2'
     coroutineLifecycleVersion = '2.4.1'
     okhttp3Version = '4.10.0'
-    retrofitVersion = '2.5.0'
+    retrofitVersion = '2.9.0'
     glideVersion = '4.11.0'
     navigationVersion = '2.4.2'
     fragmentVersion = '1.4.1'
