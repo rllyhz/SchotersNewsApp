@@ -5,4 +5,9 @@
    <string name="main_bottom_nav_menu_home">Home</string>
    <string name="main_bottom_nav_menu_search">Search</string>
    <string name="main_bottom_nav_menu_profile">Profile</string>
+
+   <!-- Toolbar title  -->
+   <string name="toolbar_title_home">Trending News</string>
+   <string name="toolbar_title_search">Search News</string>
+   <string name="toolbar_title_profile">Profile</string>
 </resources>
