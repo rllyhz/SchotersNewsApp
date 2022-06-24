@@ -1,6 +1,7 @@
 package id.rllyhz.schotersnewsapp.api
 
 import id.rllyhz.schotersnewsapp.data.responses.NewsResponse
+import id.rllyhz.schotersnewsapp.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,7 +12,7 @@ interface NewsAPI {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = ""
+        apiKey: String = Constants.apiKey
     ): Response<NewsResponse>
 
     @GET("v2/everything")
@@ -21,6 +22,6 @@ interface NewsAPI {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = ""
+        apiKey: String = Constants.apiKey
     ): Response<NewsResponse>
 }
