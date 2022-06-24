@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <dimen name="shimmer_item_radius_corner_size">3dp</dimen>
+   <dimen name="shimmer_item_image_size">72dp</dimen>
+   <dimen name="shimmer_item_bottom_gap_size">8dp</dimen>
+</resources>

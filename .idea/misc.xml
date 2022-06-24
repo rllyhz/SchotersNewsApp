@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/background_shimmer_effect.xml" value="0.1195" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/ic_compass_outlined.xml" value="0.1" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/ic_home_outlined.xml" value="0.1" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/selector_ic_compass.xml" value="0.1" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/fragment_home.xml" value="0.17395833333333333" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/fragment_profile.xml" value="0.17395833333333333" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/fragment_search.xml" value="0.17395833333333333" />
+        <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/shimmer_card_item.xml" value="0.16666666666666666" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/menu/main_bottom_nav_menu.xml" value="0.1296875" />
       </map>
     </option>
