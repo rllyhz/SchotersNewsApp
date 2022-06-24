@@ -13,19 +13,20 @@ class RemoteDataSource constructor(
     suspend fun getTrendingNews(): LiveData<Resource<List<Article>>> {
         val results = MutableLiveData<Resource<List<Article>>>(Resource.Initial())
 
-        results.value = Resource.Loading()
+        results.postValue(Resource.Loading())
 
         try {
             val response = newsAPI.getTrendingNews()
             val bodyResponse = response.body()
 
             if (response.isSuccessful && bodyResponse != null) {
-                results.value = Resource.Success(bodyResponse.articles)
+                val data = Resource.Success(bodyResponse.articles)
+                results.postValue(data)
             } else {
-                results.value = Resource.Error(response.message())
+                results.postValue(Resource.Error(response.message()))
             }
         } catch (exc: Exception) {
-            results.value = Resource.Error("Something went wrong")
+            results.postValue(Resource.Error("Something went wrong"))
         }
 
         return results
@@ -34,19 +35,20 @@ class RemoteDataSource constructor(
     suspend fun searchNews(query: String): LiveData<Resource<List<Article>>> {
         val results = MutableLiveData<Resource<List<Article>>>(Resource.Initial())
 
-        results.value = Resource.Loading()
+        results.postValue(Resource.Loading())
 
         try {
             val response = newsAPI.searchNews(query)
             val bodyResponse = response.body()
 
             if (response.isSuccessful && bodyResponse != null) {
-                results.value = Resource.Success(bodyResponse.articles)
+                val data = Resource.Success(bodyResponse.articles)
+                results.postValue(data)
             } else {
-                results.value = Resource.Error(response.message())
+                results.postValue(Resource.Error(response.message()))
             }
         } catch (exc: Exception) {
-            results.value = Resource.Error("Something went wrong")
+            results.postValue(Resource.Error("Something went wrong"))
         }
 
         return results
