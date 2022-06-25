@@ -9,13 +9,27 @@
    <!-- Toolbar title  -->
    <string name="toolbar_title_home">Trending News</string>
    <string name="toolbar_title_search">Search News</string>
-   <string name="toolbar_title_profile">Profile</string>
+   <string name="toolbar_title_profile">Favorites</string>
+   <string name="toolbar_title_detail">Detail News</string>
+
    <string name="article_cover_dummy">Article Cover</string>
    <string name="article_title_dummy">Title Article</string>
    <string name="article_description_dummy">Description Article</string>
+   <string name="article_published_at">12 Oct 2022 – 19:20:00</string>
+   <string name="article_content_dummy">Hello there</string>
+
    <string name="home_screen_error_message">Something went wrong! \nPlease check your connection.</string>
    <string name="home_screen_try_again_text">Try Again</string>
+
    <string name="search_error_searching_message">Something went wrong! \nMake sure your connection stable and try again.</string>
    <string name="search_hint_text">Search …</string>
    <string name="search_data_not_found_message">Your data not found :( \nPlease check your query is already correct.</string>
+
+   <string name="detail_fab_text">Add it to favorite</string>
+   <string name="detail_authors_label">Author(s) :</string>
+   <string name="article_authors_dummy">Alex Curbin</string>
+   <string name="detail_see_more_label">See more</string>
+   <string name="detail_btn_oke_text">Oke</string>
+   <string name="detail_news_added_message">Added to favorites</string>
+   <string name="detail_news_deleted_message">Deleted from favorites</string>
 </resources>
