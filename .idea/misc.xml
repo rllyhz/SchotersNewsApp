@@ -7,6 +7,8 @@
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/bg_card.xml" value="0.1" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/bg_placeholder_article_cover.xml" value="0.1195" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/bg_screen.xml" value="0.1" />
+        <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/bg_search_edit_text.xml" value="0.1195" />
+        <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/bg_shimmer_effect.xml" value="0.1" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/cover_effect.xml" value="0.1" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/ic_compass_outlined.xml" value="0.1" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/drawable/ic_home_outlined.xml" value="0.1" />
@@ -16,7 +18,7 @@
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/activity_main.xml" value="0.16041666666666668" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/fragment_home.xml" value="0.17395833333333333" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/fragment_profile.xml" value="0.17395833333333333" />
-        <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/fragment_search.xml" value="0.25" />
+        <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/fragment_search.xml" value="0.17395833333333333" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/item_article.xml" value="0.1648148148148148" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/layout/shimmer_card_item.xml" value="0.16666666666666666" />
         <entry key="..\:/Rakamin Academy/Virtual Internship Experience/Mobile Dev Apps - Schoters/Project Akhir/Project/SchotersNewsApp/app/src/main/res/menu/main_bottom_nav_menu.xml" value="0.1296875" />

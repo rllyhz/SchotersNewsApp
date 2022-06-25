@@ -6,8 +6,23 @@
    android:layout_height="match_parent"
    tools:context=".ui.features.search.SearchFragment">
 
+   <EditText
+      android:id="@+id/search_et_search"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="12dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/bg_search_edit_text"
+      android:imeOptions="actionSearch"
+      android:inputType="text"
+      android:maxLines="1"
+      android:padding="12dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
    <com.airbnb.lottie.LottieAnimationView
-      android:id="@+id/loading_anim_view"
+      android:id="@+id/search_loading_anim_view"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toBottomOf="parent"
