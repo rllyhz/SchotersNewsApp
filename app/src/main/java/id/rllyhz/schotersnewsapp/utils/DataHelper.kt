@@ -30,7 +30,7 @@ private fun getCorrectDate(date: String): String {
 
 // change number-month into named-month
 private fun getCorrectMonth(month: String): String =
-    when(month.toInt()) {
+    when (month.toInt()) {
         2 -> "Feb"
         3 -> "Mar"
         4 -> "Apr"
