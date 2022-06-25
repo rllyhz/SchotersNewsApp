@@ -13,4 +13,6 @@
    <string name="article_cover_dummy">Article Cover</string>
    <string name="article_title_dummy">Title Article</string>
    <string name="article_description_dummy">Description Article</string>
+   <string name="home_screen_error_message">Something went wrong! \nPlease check your connection.</string>
+   <string name="home_screen_try_again_text">Try Again</string>
 </resources>

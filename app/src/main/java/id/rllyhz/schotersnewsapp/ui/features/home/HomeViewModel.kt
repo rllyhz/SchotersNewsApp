@@ -10,43 +10,14 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel(
     private val repository: NewsRepository,
-    private val dispatchers: DispatcherProvider
 ) : ViewModel() {
-    private var _news: MutableLiveData<List<Article>?> =
-        MutableLiveData(null)
-    val news: LiveData<List<Article>?> = _news
 
-    val shouldLoading = MutableLiveData(false)
-    val isError = MutableLiveData(false)
-
-    fun getTrendingNews() = viewModelScope.launch(dispatchers.io) {
-        val result = repository.getTrendingNews()
-
-        when (result.value) {
-            is Resource.Loading -> withContext(dispatchers.main) {
-                shouldLoading.value = true
-                isError.value = false
-                _news.value = result.value?.data
-            }
-            is Resource.Error -> withContext(dispatchers.main) {
-                shouldLoading.value = false
-                isError.value = true
-                _news.value = result.value?.data
-            }
-            is Resource.Success -> withContext(dispatchers.main) {
-                shouldLoading.value = false
-                isError.value = false
-                _news.value = result.value!!.data
-            }
-            else -> Unit
-        }
-    }
+    suspend fun getNews() = repository.getTrendingNews()
 
     class Factory(
-        private val repository: NewsRepository,
-        private val dispatchers: DispatcherProvider
+        private val repository: NewsRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T =
-            HomeViewModel(repository, dispatchers) as T
+            HomeViewModel(repository) as T
     }
 }
