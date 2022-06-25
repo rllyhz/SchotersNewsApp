@@ -57,6 +57,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$coroutineLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$coroutineLifecycleVersion"
 
+    // Room Persistent
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$roomVersion"
+
     // Retrofit requisites retro+gson
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
