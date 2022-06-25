@@ -15,4 +15,7 @@
    <string name="article_description_dummy">Description Article</string>
    <string name="home_screen_error_message">Something went wrong! \nPlease check your connection.</string>
    <string name="home_screen_try_again_text">Try Again</string>
+   <string name="search_error_searching_message">Something went wrong! \nMake sure your connection stable and try again.</string>
+   <string name="search_hint_text">Search …</string>
+   <string name="search_data_not_found_message">Your data not found :( \nPlease check your query is already correct.</string>
 </resources>

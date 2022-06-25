@@ -9,6 +9,7 @@
    <EditText
       android:id="@+id/search_et_search"
       android:layout_width="0dp"
+      android:hint="@string/search_hint_text"
       android:layout_height="wrap_content"
       android:layout_marginHorizontal="12dp"
       android:layout_marginTop="16dp"
@@ -45,5 +46,31 @@
       app:lottie_autoPlay="false"
       app:lottie_fileName="searching_in_progress.json"
       app:lottie_loop="true" />
+
+   <TextView
+      android:id="@+id/search_error_text_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:visibility="gone"
+      android:text="@string/search_error_searching_message"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/search_et_search" />
+
+   <TextView
+      android:id="@+id/search_data_not_found_text_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:visibility="gone"
+      android:text="@string/search_data_not_found_message"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/search_et_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
