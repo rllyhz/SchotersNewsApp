@@ -6,14 +6,16 @@
    android:layout_height="match_parent"
    tools:context=".ui.features.search.SearchFragment">
 
-   <TextView
-      android:layout_width="wrap_content"
+   <com.airbnb.lottie.LottieAnimationView
+      android:id="@+id/loading_anim_view"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:text="Search Fragment"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
-
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:lottie_autoPlay="false"
+      app:lottie_fileName="searching_in_progress.json"
+      app:lottie_loop="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

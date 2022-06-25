@@ -10,4 +10,7 @@
    <string name="toolbar_title_home">Trending News</string>
    <string name="toolbar_title_search">Search News</string>
    <string name="toolbar_title_profile">Profile</string>
+   <string name="article_cover_dummy">Article Cover</string>
+   <string name="article_title_dummy">Title Article</string>
+   <string name="article_description_dummy">Description Article</string>
 </resources>

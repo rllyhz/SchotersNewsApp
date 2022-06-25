@@ -20,6 +20,16 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.loadingAnimView.playAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.loadingAnimView.pauseAnimation()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

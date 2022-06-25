@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+   <style name="CustomSearchView" parent="Widget.AppCompat.Light.SearchView">
+      <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+      <item name="commitIcon">@null</item>
+      <item name="goIcon">@null</item>
+      <item name="searchHintIcon">@null</item>
+   </style>
 </resources>
