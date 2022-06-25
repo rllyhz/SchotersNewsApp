@@ -1,4 +1,28 @@
 package id.rllyhz.schotersnewsapp.data.source.local
 
-class LocalDataSource {
+import androidx.lifecycle.LiveData
+import id.rllyhz.schotersnewsapp.data.models.FavArticle
+import id.rllyhz.schotersnewsapp.db.ArticleDao
+
+class LocalDataSource constructor(
+    private val newsDao: ArticleDao
+) {
+    fun getAllNews(): LiveData<List<FavArticle>> =
+        newsDao.getAllNews()
+
+    suspend fun insertOrUpdateNews(news: FavArticle): Long =
+        newsDao.insertOrUpdate(news)
+
+    suspend fun deleteNews(news: FavArticle) =
+        newsDao.deleteNews(news)
+
+    companion object {
+        @Volatile
+        private var localDataSource: LocalDataSource? = null
+
+        fun getInstance(dao: ArticleDao): LocalDataSource =
+            localDataSource ?: synchronized(this) {
+                localDataSource ?: LocalDataSource(dao)
+            }
+    }
 }
