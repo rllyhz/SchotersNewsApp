@@ -3,8 +3,8 @@ package id.rllyhz.schotersnewsapp.data.models
 import java.io.Serializable
 
 data class Article(
-    val author: String,
-    val content: String,
+    val author: String?,
+    val content: String?,
     val description: String,
     val publishedAt: String,
     val source: Source,
