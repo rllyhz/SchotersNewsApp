@@ -12,7 +12,7 @@
       android:supportsRtl="true"
       android:theme="@style/Theme.SchotersNewsApp">
       <activity
-         android:name=".DetailActivity"
+         android:name=".ui.detail.DetailActivity"
          android:exported="false" />
       <activity
          android:name=".ui.main.MainActivity"
