@@ -1,7 +1,7 @@
 package id.rllyhz.schotersnewsapp.ui.features.search
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.rllyhz.schotersnewsapp.data.models.Article
 import id.rllyhz.schotersnewsapp.databinding.FragmentSearchBinding
 import id.rllyhz.schotersnewsapp.ui.adapters.ArticleListAdapter
+import id.rllyhz.schotersnewsapp.ui.detail.DetailActivity
 import id.rllyhz.schotersnewsapp.utils.Constants
 import id.rllyhz.schotersnewsapp.utils.Resource
 import id.rllyhz.schotersnewsapp.utils.hide
@@ -150,7 +151,10 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
     }
 
     override fun onClick(article: Article) {
-        Log.d("myapp", "Searched Item clicked!")
+        Intent(requireContext().applicationContext, DetailActivity::class.java).run {
+            putExtra(DetailActivity.ARTICLE_KEY, article)
+            startActivity(this)
+        }
     }
 
     override fun onDestroyView() {
