@@ -7,13 +7,13 @@ import id.rllyhz.schotersnewsapp.db.ArticleDao
 class LocalDataSource constructor(
     private val newsDao: ArticleDao
 ) {
-    fun getAllNews(): LiveData<List<FavArticle>> =
+    fun getAllFavNews(): LiveData<List<FavArticle>> =
         newsDao.getAllNews()
 
-    suspend fun insertOrUpdateNews(news: FavArticle): Long =
+    suspend fun insertOrUpdateFavNews(news: FavArticle): Long =
         newsDao.insertOrUpdate(news)
 
-    suspend fun deleteNews(news: FavArticle) =
+    suspend fun deleteFavNews(news: FavArticle) =
         newsDao.deleteNews(news)
 
     companion object {
