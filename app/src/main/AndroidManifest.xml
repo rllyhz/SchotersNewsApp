@@ -12,6 +12,9 @@
       android:supportsRtl="true"
       android:theme="@style/Theme.SchotersNewsApp">
       <activity
+         android:name=".DetailActivity"
+         android:exported="false" />
+      <activity
          android:name=".ui.main.MainActivity"
          android:exported="true"
          android:windowSoftInputMode="adjustPan">
