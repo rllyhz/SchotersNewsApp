@@ -19,6 +19,9 @@ import id.rllyhz.schotersnewsapp.utils.Resource
 import id.rllyhz.schotersnewsapp.utils.hide
 import id.rllyhz.schotersnewsapp.utils.show
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
     private var _binding: FragmentHomeBinding? = null
@@ -26,6 +29,10 @@ class HomeFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
 
     private var articleListAdapter: ArticleListAdapter? = null
     private var viewModel: HomeViewModel? = null
+
+    // this should be injected by di
+    private val dispatchers = Constants.dispatchersProvider
+    private val repository = Constants.getRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +55,7 @@ class HomeFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
 
         viewModel = ViewModelProvider(
             this,
-            HomeViewModel.Factory(Constants.getRepository())
+            HomeViewModel.Factory(repository)
         )[HomeViewModel::class.java]
 
         binding.apply {
@@ -65,22 +72,24 @@ class HomeFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
         setLoadingUI()
 
         binding.apply {
-            lifecycleScope.launchWhenResumed {
-                viewModel?.getNews()?.observe(viewLifecycleOwner) { resources ->
-                    when (resources) {
-                        is Resource.Loading -> setLoadingUI()
-                        is Resource.Error -> setErrorUI()
-                        is Resource.Success -> {
-                            val news = resources.data
+            viewLifecycleOwner.lifecycleScope.launch(Constants.dispatchersProvider.io) {
+                viewModel?.let {
+                    it.getNews().asFlow().distinctUntilChanged().collect { dataResources ->
+                        when (dataResources) {
+                            is Resource.Loading -> withContext(dispatchers.main) { setLoadingUI() }
+                            is Resource.Error -> withContext(dispatchers.main) { setErrorUI() }
+                            is Resource.Success -> {
+                                val news = dataResources.data
 
-                            if (!news.isNullOrEmpty()) {
-                                setSuccessUI(news)
-                            } else {
-                                // data not found
-                                setErrorUI()
+                                if (!news.isNullOrEmpty()) {
+                                    withContext(dispatchers.main) { setSuccessUI(news) }
+                                } else {
+                                    // data not found
+                                    withContext(dispatchers.main) { setErrorUI() }
+                                }
                             }
+                            else -> Unit
                         }
-                        else -> Unit
                     }
                 }
             }
