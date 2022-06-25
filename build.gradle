@@ -16,6 +16,7 @@ ext {
     navigationVersion = '2.4.2'
     fragmentVersion = '1.4.1'
     shimmerEffectVersion = '0.5.0'
+    lottieVersion = '5.2.0'
 }
 
 task clean(type: Delete) {
