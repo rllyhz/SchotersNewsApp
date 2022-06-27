@@ -10,10 +10,10 @@ class LocalDataSource constructor(
     fun getAllFavNews(): LiveData<List<FavArticle>> =
         newsDao.getAllNews()
 
-    suspend fun insertOrUpdateFavNews(news: FavArticle): Long =
+    fun insertOrUpdateFavNews(news: FavArticle): Long =
         newsDao.insertOrUpdate(news)
 
-    suspend fun deleteFavNews(news: FavArticle): Int =
+    fun deleteFavNews(news: FavArticle): Int =
         newsDao.deleteNews(news)
 
     companion object {
