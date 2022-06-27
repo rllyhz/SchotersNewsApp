@@ -3,6 +3,8 @@ package id.rllyhz.schotersnewsapp.ui.features.search
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +33,7 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
 
     private var articleListAdapter: ArticleListAdapter? = null
     private var editorListener: TextView.OnEditorActionListener? = null
+    private var textWatcher: TextWatcher? = null
     private var viewModel: SearchViewModel? = null
 
     private var _activity: MainActivity? = null
@@ -60,10 +63,13 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
                 SearchViewModel.Factory(activity.repository)
             )[SearchViewModel::class.java]
 
-            createEditorListener()
+            createListeners()
 
             binding.apply {
+                searchClearQueryBtn.hide()
                 searchEtSearch.setOnEditorActionListener(editorListener)
+                searchEtSearch.addTextChangedListener(textWatcher)
+                searchClearQueryBtn.setOnClickListener { searchEtSearch.text.clear() }
                 searchRv.adapter = articleListAdapter
                 searchRv.layoutManager = LinearLayoutManager(requireContext())
             }
@@ -108,12 +114,31 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
         }
     }
 
-    private fun createEditorListener() {
+    private fun createListeners() {
         editorListener = TextView.OnEditorActionListener { _, actionId, _ ->
             when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> searchNews()
             }
             true
+        }
+
+        textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //
+            }
+
+            override fun onTextChanged(query: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                query?.let {
+                    if (it.length > 1)
+                        binding.searchClearQueryBtn.show()
+                    else
+                        binding.searchClearQueryBtn.hide()
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                //
+            }
         }
     }
 
@@ -175,8 +200,10 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
     override fun onDestroyView() {
         super.onDestroyView()
         binding.searchEtSearch.setOnEditorActionListener(null)
+        binding.searchEtSearch.removeTextChangedListener(textWatcher)
         binding.searchRv.adapter = null
         editorListener = null
+        textWatcher = null
         _binding = null
     }
 

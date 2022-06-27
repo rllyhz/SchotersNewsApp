@@ -24,6 +24,7 @@
    <string name="search_error_searching_message">Something went wrong! \nMake sure your connection stable and try again.</string>
    <string name="search_hint_text">Search …</string>
    <string name="search_data_not_found_message">Your data not found :( \nPlease check your query is already correct.</string>
+   <string name="search_clear_query_btn_text">Clear query for search</string>
 
    <string name="detail_fab_text">Add it to favorite</string>
    <string name="detail_authors_label">Author(s) :</string>
