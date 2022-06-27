@@ -10,7 +10,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import id.rllyhz.schotersnewsapp.R
 import id.rllyhz.schotersnewsapp.data.models.FavArticle
 import id.rllyhz.schotersnewsapp.databinding.FragmentFavoritesBinding
 import id.rllyhz.schotersnewsapp.ui.adapters.FavArticleListAdapter
@@ -57,6 +61,40 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
             binding.apply {
                 favoritesRv.layoutManager = LinearLayoutManager(requireContext())
                 favoritesRv.adapter = favArticleListAdapter
+
+                val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+                    ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                    ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+                ) {
+                    override fun onMove(
+                        recyclerView: RecyclerView,
+                        viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder
+                    ): Boolean = true
+
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        val position = viewHolder.adapterPosition
+
+                        favArticleListAdapter?.let {
+                            val favNews = it.getFavNews(position)
+                            _viewModel?.deleteFavNews(favNews)
+
+                            Snackbar.make(
+                                binding.favoritesCoordinatorLayout,
+                                getString(R.string.detail_news_deleted_message),
+                                Snackbar.LENGTH_SHORT
+                            )
+                                .setAction(getString(R.string.detail_btn_oke_text)) {
+                                    //
+                                }
+                                .show()
+                        }
+                    }
+                }
+
+                ItemTouchHelper(itemTouchHelperCallback)
+                    .attachToRecyclerView(binding.favoritesRv)
+
                 setInitialUI()
 
                 loadFavNews()
@@ -66,7 +104,7 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
 
     private fun loadFavNews() {
         _viewModel?.let { viewModel ->
-            viewModel.getAllNews().observe(viewLifecycleOwner) {
+            viewModel.getAllFavNews().observe(viewLifecycleOwner) {
                 if (it.isNullOrEmpty()) showNoDataUI() else showHasDataUI(it)
             }
         }
@@ -109,8 +147,8 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
             if (it.resultCode == DetailActivity.DETAIL_RESULT_CODE) {
                 // re-load data from db
                 // somehow typed Flow of getAllNews() method on Dao not
-                // updating the newest emit data directly, so have to trigger it manually
-                // by re-retrieving and re-observing the data
+                // updating the newest emit data directly when deleting in detail activity,
+                // so have to trigger it manually by re-retrieving and re-observing the data
                 loadFavNews()
             }
         }

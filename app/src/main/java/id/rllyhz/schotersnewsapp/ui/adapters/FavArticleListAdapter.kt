@@ -26,6 +26,10 @@ class FavArticleListAdapter :
         callback = null
     }
 
+    // access to getting the single fav news
+    fun getFavNews(position: Int): FavArticle =
+        getItem(position)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavArticleListViewHolder {
         val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavArticleListViewHolder(binding)
