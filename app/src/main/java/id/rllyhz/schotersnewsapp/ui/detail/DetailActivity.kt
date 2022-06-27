@@ -26,8 +26,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var repository: NewsRepository
     private lateinit var dispatcherProvider: DispatcherProvider
 
-    private var fav = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -36,13 +34,12 @@ class DetailActivity : AppCompatActivity() {
 
         repository = Constants.getRepository(this)
         dispatcherProvider = Constants.dispatchersProvider
+        val news = intent.getSerializableExtra(ARTICLE_KEY) as Article
 
         viewModel = ViewModelProvider(
             this,
-            DetailViewModel.Factory(repository, dispatcherProvider)
+            DetailViewModel.Factory(repository, dispatcherProvider, news)
         )[DetailViewModel::class.java]
-
-        val news = intent.getSerializableExtra(ARTICLE_KEY) as Article
 
         binding.apply {
             detailToolbar.run {
@@ -70,7 +67,9 @@ class DetailActivity : AppCompatActivity() {
                 viewModel.addOrDeleteFromFav(
                     news, listOf(
                         getString(R.string.detail_news_added_message),
-                        getString(R.string.detail_news_deleted_message)
+                        getString(R.string.detail_news_failed_to_add_message),
+                        getString(R.string.detail_news_deleted_message),
+                        getString(R.string.detail_news_failed_to_delete_message)
                     )
                 )
             }
@@ -87,9 +86,7 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
 
-            viewModel.isFavorite.observe(this@DetailActivity) { favorite ->
-                fav = favorite
-
+            viewModel.isFavorite.observe(this@DetailActivity) { fav ->
                 detailFavoriteFab.setImageDrawable(
                     ContextCompat.getDrawable(
                         this@DetailActivity,

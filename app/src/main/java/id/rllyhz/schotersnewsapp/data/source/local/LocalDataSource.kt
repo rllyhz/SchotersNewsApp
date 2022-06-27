@@ -1,20 +1,27 @@
 package id.rllyhz.schotersnewsapp.data.source.local
 
-import androidx.lifecycle.LiveData
 import id.rllyhz.schotersnewsapp.data.models.FavArticle
 import id.rllyhz.schotersnewsapp.db.ArticleDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource constructor(
     private val newsDao: ArticleDao
 ) {
-    fun getAllFavNews(): LiveData<List<FavArticle>> =
+    fun getAllFavNews(): Flow<List<FavArticle>> =
         newsDao.getAllNews()
 
-    fun insertOrUpdateFavNews(news: FavArticle): Long =
-        newsDao.insertOrUpdate(news)
+    fun getFavNewsById(favNews: FavArticle): FavArticle? =
+        newsDao.getFavNews(
+            favNews.title,
+            favNews.publishedAt, favNews.url, favNews.urlToImage,
+            favNews.author
+        )
 
-    fun deleteFavNews(news: FavArticle): Int =
-        newsDao.deleteNews(news)
+    fun insertOrUpdateFavNews(favNews: FavArticle): Long =
+        newsDao.insertOrUpdate(favNews)
+
+    fun deleteFavNews(favNews: FavArticle): Int =
+        newsDao.deleteNews(favNews)
 
     companion object {
         @Volatile

@@ -48,19 +48,23 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
         _activity?.let { activity ->
             _viewModel = ViewModelProvider(
                 this,
-                FavoritesViewModel.Factory(activity.repository, activity.dispatchers)
+                FavoritesViewModel.Factory(activity.repository)
             )[FavoritesViewModel::class.java]
 
             binding.apply {
                 favoritesRv.layoutManager = LinearLayoutManager(requireContext())
-                favoritesRv.adapter = null
+                favoritesRv.adapter = favArticleListAdapter
                 setInitialUI()
 
-                _viewModel?.let { viewModel ->
-                    viewModel.getAllNews().observe(viewLifecycleOwner) {
-                        if (it.isNullOrEmpty()) showNoDataUI() else showHasDataUI(it)
-                    }
-                }
+                loadFavNews()
+            }
+        }
+    }
+
+    private fun loadFavNews() {
+        _viewModel?.let { viewModel ->
+            viewModel.getAllNews().observe(viewLifecycleOwner) {
+                if (it.isNullOrEmpty()) showNoDataUI() else showHasDataUI(it)
             }
         }
     }
@@ -103,6 +107,7 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.favoritesRv.adapter = null
         _binding = null
         _viewModel = null
     }

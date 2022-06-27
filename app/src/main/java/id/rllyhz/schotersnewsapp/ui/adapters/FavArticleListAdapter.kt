@@ -12,10 +12,12 @@ import id.rllyhz.schotersnewsapp.databinding.ItemArticleBinding
 import id.rllyhz.schotersnewsapp.utils.formalizeDate
 
 class FavArticleListAdapter :
-    ListAdapter<FavArticle, FavArticleListAdapter.FavArticleListViewHolder>(FavArticleComparator()) {
-    private var callback: FavArticleListAdapter.ItemClickCallback? = null
+    ListAdapter<FavArticle, FavArticleListAdapter.FavArticleListViewHolder>(
+        FavArticleComparator()
+    ) {
+    private var callback: ItemClickCallback? = null
 
-    fun setOnItemClickListener(listener: FavArticleListAdapter.ItemClickCallback) {
+    fun setOnItemClickListener(listener: ItemClickCallback) {
         callback = listener
     }
 
@@ -53,7 +55,8 @@ class FavArticleListAdapter :
                 itemArticleTitle.text = favArticle.title
                 itemArticlePublishedAt.text = formalizeDate(favArticle.publishedAt)
 
-                itemView.setOnClickListener { //callback?.onClick(favArticle)
+                itemView.setOnClickListener {
+                    callback?.onClick(favArticle)
                 }
             }
         }

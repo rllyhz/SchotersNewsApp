@@ -1,12 +1,14 @@
 package id.rllyhz.schotersnewsapp.data.source
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import id.rllyhz.schotersnewsapp.data.models.Article
 import id.rllyhz.schotersnewsapp.data.models.FavArticle
 import id.rllyhz.schotersnewsapp.data.source.local.LocalDataSource
 import id.rllyhz.schotersnewsapp.data.source.remote.RemoteDataSource
 import id.rllyhz.schotersnewsapp.utils.DispatcherProvider
 import id.rllyhz.schotersnewsapp.utils.Resource
+import id.rllyhz.schotersnewsapp.utils.asLocalModel
 import kotlinx.coroutines.withContext
 
 class NewsRepository(
@@ -21,7 +23,10 @@ class NewsRepository(
         remoteDataSource.searchNews(query)
 
     override fun getAllFavNews(): LiveData<List<FavArticle>> =
-        localDataSource.getAllFavNews()
+        localDataSource.getAllFavNews().asLiveData()
+
+    override suspend fun getFavNewsOf(news: Article): FavArticle? =
+        localDataSource.getFavNewsById(news.asLocalModel())
 
     override suspend fun insertOrUpdateFavNews(favNews: FavArticle): Long =
         withContext(dispatcherProvider.io) {

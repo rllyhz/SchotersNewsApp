@@ -31,7 +31,9 @@
    <string name="detail_see_more_label">See more</string>
    <string name="detail_btn_oke_text">Oke</string>
    <string name="detail_news_added_message">Added to favorites</string>
+   <string name="detail_news_failed_to_add_message">Failed to add to favorites</string>
    <string name="detail_news_deleted_message">Deleted from favorites</string>
+   <string name="detail_news_failed_to_delete_message">Failed to delete from favorites</string>
 
    <string name="favorites_empty_data_message">You still don\'t have any favorites news. \nGo explore the news and add one!</string>
 </resources>
