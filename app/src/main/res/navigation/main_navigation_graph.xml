@@ -13,7 +13,7 @@
       android:name="id.rllyhz.schotersnewsapp.ui.features.search.SearchFragment"
       android:label="@string/toolbar_title_search" />
    <fragment
-      android:id="@+id/profileFragment"
-      android:name="id.rllyhz.schotersnewsapp.ui.features.profile.ProfileFragment"
+      android:id="@+id/favoritesFragment"
+      android:name="id.rllyhz.schotersnewsapp.ui.features.favorites.FavoritesFragment"
       android:label="@string/toolbar_title_profile" />
 </navigation>

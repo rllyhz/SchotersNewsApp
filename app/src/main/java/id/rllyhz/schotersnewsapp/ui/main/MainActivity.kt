@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
-    // this should be injected by DI
+    // these should be injected by DI
     lateinit var repository: NewsRepository
     lateinit var dispatchers: DispatcherProvider
 
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 setOf(
                     R.id.homeFragment,
                     R.id.searchFragment,
-                    R.id.profileFragment
+                    R.id.favoritesFragment
                 )
             )
 

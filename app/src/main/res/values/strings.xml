@@ -4,7 +4,7 @@
    <!-- Main Bottom Navigation Menu  -->
    <string name="main_bottom_nav_menu_home">Home</string>
    <string name="main_bottom_nav_menu_search">Search</string>
-   <string name="main_bottom_nav_menu_profile">Profile</string>
+   <string name="main_bottom_nav_menu_favorites">Favorites</string>
 
    <!-- Toolbar title  -->
    <string name="toolbar_title_home">Trending News</string>

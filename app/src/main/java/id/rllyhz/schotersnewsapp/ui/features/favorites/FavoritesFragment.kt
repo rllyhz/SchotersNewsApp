@@ -1,14 +1,14 @@
-package id.rllyhz.schotersnewsapp.ui.features.profile
+package id.rllyhz.schotersnewsapp.ui.features.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import id.rllyhz.schotersnewsapp.databinding.FragmentProfileBinding
+import id.rllyhz.schotersnewsapp.databinding.FragmentFavoritesBinding
 
-class ProfileFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
+class FavoritesFragment : Fragment() {
+    private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -16,7 +16,7 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
