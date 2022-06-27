@@ -55,7 +55,7 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
         _activity?.let { activity ->
             _viewModel = ViewModelProvider(
                 this,
-                FavoritesViewModel.Factory(activity.repository)
+                FavoritesViewModel.Factory(activity.repository, activity.dispatchers)
             )[FavoritesViewModel::class.java]
 
             binding.apply {
