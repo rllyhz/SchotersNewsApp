@@ -1,5 +1,6 @@
 package id.rllyhz.schotersnewsapp.ui.features.search
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,11 +17,10 @@ import id.rllyhz.schotersnewsapp.data.models.Article
 import id.rllyhz.schotersnewsapp.databinding.FragmentSearchBinding
 import id.rllyhz.schotersnewsapp.ui.adapters.ArticleListAdapter
 import id.rllyhz.schotersnewsapp.ui.detail.DetailActivity
-import id.rllyhz.schotersnewsapp.utils.Constants
+import id.rllyhz.schotersnewsapp.ui.main.MainActivity
 import id.rllyhz.schotersnewsapp.utils.Resource
 import id.rllyhz.schotersnewsapp.utils.hide
 import id.rllyhz.schotersnewsapp.utils.show
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,9 +33,7 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
     private var editorListener: TextView.OnEditorActionListener? = null
     private var viewModel: SearchViewModel? = null
 
-    // this should be injected by DI
-    private val repository = Constants.getRepository()
-    private val dispatchers = Constants.dispatchersProvider
+    private var _activity: MainActivity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,14 +54,14 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(
-            this,
-            SearchViewModel.Factory(repository)
-        )[SearchViewModel::class.java]
+        _activity?.let { activity ->
+            viewModel = ViewModelProvider(
+                this,
+                SearchViewModel.Factory(activity.repository)
+            )[SearchViewModel::class.java]
 
-        createEditorListener()
+            createEditorListener()
 
-        viewModel?.let { vm ->
             binding.apply {
                 searchEtSearch.setOnEditorActionListener(editorListener)
                 searchRv.adapter = articleListAdapter
@@ -76,27 +74,34 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
         // set loading UI at first
         setLoadingUI()
 
-        binding.apply {
-            val query = binding.searchEtSearch.text.toString()
+        _activity?.let { activity ->
+            binding.apply {
+                val query = binding.searchEtSearch.text.toString()
 
-            viewLifecycleOwner.lifecycleScope.launch(dispatchers.io) {
-                viewModel?.let {
-                    it.searchNews(query).asFlow().distinctUntilChanged().collect { searchResult ->
-                        when (searchResult) {
-                            is Resource.Loading -> withContext(dispatchers.main) { setLoadingUI() }
-                            is Resource.Error -> withContext(dispatchers.main) { setErrorUI() }
-                            is Resource.Success -> {
-                                val news = searchResult.data
+                viewLifecycleOwner.lifecycleScope.launch(activity.dispatchers.io) {
+                    viewModel?.let {
+                        it.searchNews(query).asFlow().distinctUntilChanged()
+                            .collect { searchResult ->
+                                when (searchResult) {
+                                    is Resource.Loading -> withContext(activity.dispatchers.main) { setLoadingUI() }
+                                    is Resource.Error -> withContext(activity.dispatchers.main) { setErrorUI() }
+                                    is Resource.Success -> {
+                                        val news = searchResult.data
 
-                                if (!news.isNullOrEmpty()) {
-                                    withContext(dispatchers.main) { setSuccessUI(news) }
-                                } else {
-                                    // data not found
-                                    withContext(dispatchers.main) { setDataNotFoundUI() }
+                                        if (!news.isNullOrEmpty()) {
+                                            withContext(activity.dispatchers.main) {
+                                                setSuccessUI(
+                                                    news
+                                                )
+                                            }
+                                        } else {
+                                            // data not found
+                                            withContext(activity.dispatchers.main) { setDataNotFoundUI() }
+                                        }
+                                    }
+                                    else -> Unit
                                 }
                             }
-                            else -> Unit
-                        }
                     }
                 }
             }
@@ -155,6 +160,16 @@ class SearchFragment : Fragment(), ArticleListAdapter.ItemClickCallback {
             putExtra(DetailActivity.ARTICLE_KEY, article)
             startActivity(this)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        _activity = context as MainActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        _activity = null
     }
 
     override fun onDestroyView() {

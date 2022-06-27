@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import id.rllyhz.schotersnewsapp.R
 import id.rllyhz.schotersnewsapp.data.models.Article
+import id.rllyhz.schotersnewsapp.data.source.NewsRepository
 import id.rllyhz.schotersnewsapp.databinding.ActivityDetailBinding
 import id.rllyhz.schotersnewsapp.utils.Constants
 import id.rllyhz.schotersnewsapp.utils.formalizeDate
@@ -20,7 +21,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
 
-    private val repository = Constants.getRepository()
+    // this should be injected by DI
+    private lateinit var repository: NewsRepository
 
     private var fav = false
 
@@ -29,6 +31,8 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        repository = Constants.getRepository(this)
 
         viewModel = ViewModelProvider(
             this,

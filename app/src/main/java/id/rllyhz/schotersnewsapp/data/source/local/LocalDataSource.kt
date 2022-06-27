@@ -13,7 +13,7 @@ class LocalDataSource constructor(
     suspend fun insertOrUpdateFavNews(news: FavArticle): Long =
         newsDao.insertOrUpdate(news)
 
-    suspend fun deleteFavNews(news: FavArticle) =
+    suspend fun deleteFavNews(news: FavArticle): Int =
         newsDao.deleteNews(news)
 
     companion object {

@@ -17,6 +17,7 @@ class HomeViewModel(
     class Factory(
         private val repository: NewsRepository
     ) : ViewModelProvider.NewInstanceFactory() {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T =
             HomeViewModel(repository) as T
     }

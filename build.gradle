@@ -8,7 +8,7 @@ plugins {
 }
 
 ext {
-    coroutineVersion = '1.5.2'
+    coroutineVersion = '1.6.1'
     coroutineLifecycleVersion = '2.4.1'
     okhttp3Version = '4.10.0'
     retrofitVersion = '2.9.0'

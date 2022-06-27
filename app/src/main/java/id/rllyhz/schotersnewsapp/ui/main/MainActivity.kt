@@ -10,11 +10,18 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import id.rllyhz.schotersnewsapp.R
+import id.rllyhz.schotersnewsapp.data.source.NewsRepository
 import id.rllyhz.schotersnewsapp.databinding.ActivityMainBinding
+import id.rllyhz.schotersnewsapp.utils.Constants
+import id.rllyhz.schotersnewsapp.utils.DispatcherProvider
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
+    // this should be injected by DI
+    lateinit var repository: NewsRepository
+    lateinit var dispatchers: DispatcherProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +30,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        repository = Constants.getRepository(this)
+        dispatchers = Constants.dispatchersProvider
+
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
 
         navController = navHostFragment.findNavController()
 
         setupBottomNavigationView()
-
-        // Log.d("myapp", BuildConfig.API_KEY)
     }
 
     private fun setupBottomNavigationView() {

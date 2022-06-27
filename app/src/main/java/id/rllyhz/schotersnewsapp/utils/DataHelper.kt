@@ -1,5 +1,8 @@
 package id.rllyhz.schotersnewsapp.utils
 
+import id.rllyhz.schotersnewsapp.data.models.Article
+import id.rllyhz.schotersnewsapp.data.models.FavArticle
+
 fun formalizeDate(dateString: String): String {
     if (dateString.isEmpty()) return dateString
 
@@ -44,3 +47,25 @@ private fun getCorrectMonth(month: String): String =
         12 -> "Dec"
         else -> "Jan"
     }
+
+fun Article.asLocalModel(): FavArticle =
+    FavArticle(
+        title = title,
+        url = url,
+        urlToImage = urlToImage,
+        author = author,
+        content = content,
+        description = description,
+        publishedAt = publishedAt,
+    )
+
+fun FavArticle.asModel(): Article =
+    Article(
+        title = title,
+        url = url,
+        urlToImage = urlToImage,
+        author = author,
+        content = content,
+        description = description,
+        publishedAt = publishedAt,
+    )

@@ -8,7 +8,8 @@ import id.rllyhz.schotersnewsapp.data.models.FavArticle
 
 @Database(
     entities = [FavArticle::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class NewsDatabase : RoomDatabase() {
     abstract fun getDao(): ArticleDao

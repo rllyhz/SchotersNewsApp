@@ -10,5 +10,5 @@ interface NewsDataSource {
     suspend fun searchNews(query: String): LiveData<Resource<List<Article>>>
     fun getAllFavNews(): LiveData<List<FavArticle>>
     suspend fun insertOrUpdateFavNews(favNews: FavArticle): Long
-    suspend fun deleteFavNews(favNews: FavArticle)
+    suspend fun deleteFavNews(favNews: FavArticle): Int
 }

@@ -5,11 +5,14 @@ import id.rllyhz.schotersnewsapp.data.models.Article
 import id.rllyhz.schotersnewsapp.data.models.FavArticle
 import id.rllyhz.schotersnewsapp.data.source.local.LocalDataSource
 import id.rllyhz.schotersnewsapp.data.source.remote.RemoteDataSource
+import id.rllyhz.schotersnewsapp.utils.DispatcherProvider
 import id.rllyhz.schotersnewsapp.utils.Resource
+import kotlinx.coroutines.withContext
 
 class NewsRepository(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource
+    private val localDataSource: LocalDataSource,
+    private val dispatcherProvider: DispatcherProvider
 ) : NewsDataSource {
     override suspend fun getTrendingNews(): LiveData<Resource<List<Article>>> =
         remoteDataSource.getTrendingNews()
@@ -21,20 +24,27 @@ class NewsRepository(
         localDataSource.getAllFavNews()
 
     override suspend fun insertOrUpdateFavNews(favNews: FavArticle): Long =
-        localDataSource.insertOrUpdateFavNews(favNews)
+        withContext(dispatcherProvider.io) {
+            localDataSource.insertOrUpdateFavNews(
+                favNews
+            )
+        }
 
-    override suspend fun deleteFavNews(favNews: FavArticle) =
-        localDataSource.deleteFavNews(favNews)
+    override suspend fun deleteFavNews(favNews: FavArticle): Int =
+        withContext(dispatcherProvider.io) {
+            localDataSource.deleteFavNews(favNews)
+        }
 
     companion object {
         private var instance: NewsRepository? = null
 
         fun getInstance(
             remoteDataSource: RemoteDataSource,
-            localDataSource: LocalDataSource
+            localDataSource: LocalDataSource,
+            dispatcherProvider: DispatcherProvider
         ): NewsRepository =
             (instance ?: synchronized(this) {
-                instance ?: NewsRepository(remoteDataSource, localDataSource)
+                instance ?: NewsRepository(remoteDataSource, localDataSource, dispatcherProvider)
             })
     }
 }

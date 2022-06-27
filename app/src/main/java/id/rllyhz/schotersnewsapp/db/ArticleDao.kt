@@ -6,12 +6,12 @@ import id.rllyhz.schotersnewsapp.data.models.FavArticle
 
 @Dao
 interface ArticleDao {
-    @Query("SELECT * FROM articles")
+    @Query("SELECT * FROM articles order by id")
     fun getAllNews(): LiveData<List<FavArticle>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdate(news: FavArticle): Long
+    fun insertOrUpdate(news: FavArticle): Long
 
     @Delete
-    suspend fun deleteNews(news: FavArticle)
+    fun deleteNews(news: FavArticle): Int
 }
