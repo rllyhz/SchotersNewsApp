@@ -15,14 +15,16 @@ import id.rllyhz.schotersnewsapp.data.models.Article
 import id.rllyhz.schotersnewsapp.data.source.NewsRepository
 import id.rllyhz.schotersnewsapp.databinding.ActivityDetailBinding
 import id.rllyhz.schotersnewsapp.utils.Constants
+import id.rllyhz.schotersnewsapp.utils.DispatcherProvider
 import id.rllyhz.schotersnewsapp.utils.formalizeDate
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
 
-    // this should be injected by DI
+    // these should be injected by DI
     private lateinit var repository: NewsRepository
+    private lateinit var dispatcherProvider: DispatcherProvider
 
     private var fav = false
 
@@ -33,10 +35,11 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         repository = Constants.getRepository(this)
+        dispatcherProvider = Constants.dispatchersProvider
 
         viewModel = ViewModelProvider(
             this,
-            DetailViewModel.Factory(repository)
+            DetailViewModel.Factory(repository, dispatcherProvider)
         )[DetailViewModel::class.java]
 
         val news = intent.getSerializableExtra(ARTICLE_KEY) as Article
@@ -64,19 +67,12 @@ class DetailActivity : AppCompatActivity() {
                 .into(detailNewsCover)
 
             detailFavoriteFab.setOnClickListener {
-                viewModel.addOrDeleteFromFav()
-                val message =
-                    if (fav) getString(R.string.detail_news_added_message) else getString(R.string.detail_news_deleted_message)
-
-                Snackbar.make(
-                    detailCoordinatorLayout,
-                    message,
-                    Snackbar.LENGTH_SHORT
+                viewModel.addOrDeleteFromFav(
+                    news, listOf(
+                        getString(R.string.detail_news_added_message),
+                        getString(R.string.detail_news_deleted_message)
+                    )
                 )
-                    .setAction(getString(R.string.detail_btn_oke_text)) {
-                        //
-                    }
-                    .show()
             }
 
             // set see more link underlined
@@ -100,6 +96,16 @@ class DetailActivity : AppCompatActivity() {
                         if (fav) R.drawable.ic_fav_filled else R.drawable.ic_fav_outlined
                     )
                 )
+            }
+
+            viewModel.showMessageEvent.observe(this@DetailActivity) { event ->
+                event.getContentIfNotHandled()?.let { message ->
+                    Snackbar.make(detailCoordinatorLayout, message, Snackbar.LENGTH_SHORT)
+                        .setAction(getString(R.string.detail_btn_oke_text)) {
+                            //
+                        }
+                        .show()
+                }
             }
         }
     }
