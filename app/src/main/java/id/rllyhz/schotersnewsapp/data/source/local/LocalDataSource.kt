@@ -13,8 +13,7 @@ class LocalDataSource constructor(
     fun getFavNewsById(favNews: FavArticle): FavArticle? =
         newsDao.getFavNews(
             favNews.title,
-            favNews.publishedAt, favNews.url, favNews.urlToImage,
-            favNews.author
+            favNews.publishedAt, favNews.url, favNews.urlToImage
         )
 
     fun insertOrUpdateFavNews(favNews: FavArticle): Long =

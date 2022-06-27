@@ -9,13 +9,12 @@ interface ArticleDao {
     @Query("SELECT * FROM articles ORDER BY id DESC")
     fun getAllFavNews(): Flow<List<FavArticle>>
 
-    @Query("SELECT * FROM articles WHERE title = :title AND published_at = :publishedAt AND url = :url AND url_to_image = :urlToImage AND author = :author")
+    @Query("SELECT * FROM articles WHERE title = :title AND published_at = :publishedAt AND url = :url AND url_to_image = :urlToImage")
     fun getFavNews(
         title: String,
         publishedAt: String,
         url: String,
         urlToImage: String,
-        author: String?
     ): FavArticle?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

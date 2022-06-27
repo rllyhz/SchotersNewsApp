@@ -66,7 +66,8 @@ class ArticleListAdapter :
     // Diffutil for comparison
     class ArticleComparator : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =
-            (oldItem.title == newItem.title) && (oldItem.author == newItem.author) && (oldItem.publishedAt == newItem.publishedAt)
+            (oldItem.title == newItem.title) && (oldItem.url == newItem.url) && (oldItem.publishedAt == newItem.publishedAt)
+                    && (oldItem.urlToImage == newItem.urlToImage)
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean =
             oldItem == newItem
