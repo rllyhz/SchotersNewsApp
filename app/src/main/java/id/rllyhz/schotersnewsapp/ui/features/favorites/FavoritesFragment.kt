@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +27,7 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
     private var favArticleListAdapter: FavArticleListAdapter? = null
     private var _viewModel: FavoritesViewModel? = null
     private var _activity: MainActivity? = null
+    private var _activityResultLaunch: ActivityResultLauncher<Intent>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +83,7 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
         setInitialUI()
 
         favArticleListAdapter?.submitList(data)
+        favArticleListAdapter?.notifyDataSetChanged()
         binding.favoritesRv.show()
     }
 
@@ -91,17 +95,30 @@ class FavoritesFragment : Fragment(), FavArticleListAdapter.ItemClickCallback {
     override fun onClick(favArticle: FavArticle) {
         Intent(requireContext().applicationContext, DetailActivity::class.java).run {
             putExtra(DetailActivity.ARTICLE_KEY, favArticle.asModel())
-            startActivity(this)
+            _activityResultLaunch?.launch(this)
         }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         _activity = context as MainActivity
+
+        _activityResultLaunch = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == DetailActivity.DETAIL_RESULT_CODE) {
+                // re-load data from db
+                // somehow typed Flow of getAllNews() method on Dao not
+                // updating the newest emit data directly, so have to trigger it manually
+                // by re-retrieving and re-observing the data
+                loadFavNews()
+            }
+        }
     }
 
     override fun onDetach() {
         super.onDetach()
+        _activityResultLaunch = null
         _activity = null
     }
 

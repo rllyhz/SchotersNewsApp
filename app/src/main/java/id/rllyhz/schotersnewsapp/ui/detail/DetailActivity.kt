@@ -46,7 +46,7 @@ class DetailActivity : AppCompatActivity() {
                 setNavigationIcon(R.drawable.ic_arrow_back)
 
                 setNavigationOnClickListener {
-                    finish()
+                    finishWithResult()
                 }
             }
 
@@ -107,7 +107,17 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        finishWithResult()
+    }
+
+    private fun finishWithResult() {
+        setResult(DETAIL_RESULT_CODE)
+        finish()
+    }
+
     companion object {
         const val ARTICLE_KEY = "ARTICLE_KEY"
+        const val DETAIL_RESULT_CODE = 123
     }
 }

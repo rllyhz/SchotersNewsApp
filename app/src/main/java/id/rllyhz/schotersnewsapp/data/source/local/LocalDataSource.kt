@@ -8,7 +8,7 @@ class LocalDataSource constructor(
     private val newsDao: ArticleDao
 ) {
     fun getAllFavNews(): Flow<List<FavArticle>> =
-        newsDao.getAllNews()
+        newsDao.getAllFavNews()
 
     fun getFavNewsById(favNews: FavArticle): FavArticle? =
         newsDao.getFavNews(
