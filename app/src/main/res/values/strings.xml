@@ -32,4 +32,6 @@
    <string name="detail_btn_oke_text">Oke</string>
    <string name="detail_news_added_message">Added to favorites</string>
    <string name="detail_news_deleted_message">Deleted from favorites</string>
+
+   <string name="favorites_empty_data_message">You still don\'t have any favorites news. \nGo explore the news and add one!</string>
 </resources>
